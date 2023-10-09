@@ -1,0 +1,21 @@
+function demo(input) {
+    let seriesName = input[0];
+    let episodeDuration = Number(input[1]);
+    let breakTime = Number(input[2]);
+
+    let lunchTime = (1 / 8) * breakTime;
+    let leisureTime = (1 / 4) * breakTime;
+
+    let totalPlannedTime = lunchTime + leisureTime;
+
+    let timeForMovie = breakTime - totalPlannedTime;
+
+    if (timeForMovie >= episodeDuration) {
+        let timeLeft = timeForMovie - episodeDuration;
+        console.log(`You have enough time to watch ${seriesName} and left with ${Math.ceil(timeLeft)} minutes free time.`);
+    } else {
+        let timeNeeded = episodeDuration - timeForMovie;
+        console.log(`You dont have enough time to watch ${seriesName}, you need ${Math.ceil(timeNeeded)} more minutes.`);
+    }
+}
+demo(['Game of Thrones', '60', '96'])
