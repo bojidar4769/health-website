@@ -1,41 +1,17 @@
 function demo(input) {
-    let moneyNeeded = Number(input[0]);
-    let budget = Number(input[1]);
-    let totalDays = 0;
-    let consecutiveSpendDays = 0;
+    let series = input[0];
+    let episodeLength = Number(input[1]);
+    let breakLength = Number(input[2]);
 
-    let i = 2;
+    let timeForLunch = breakLength * 1/8;
+    let timeForBreak = breakLength * 1/4;
+    let timeLeft = breakLength - (timeForBreak + timeForLunch);
+    let timeNeeded = episodeLength - timeLeft;
 
-    while (consecutiveSpendDays < 5) {
-        let action = input[i];
-        i++;
-        let amount = Number(input[i]);
-        i++;
-
-        if (action === 'spend') {
-            consecutiveSpendDays++;
-            budget -= amount;
-            if (budget < 0) {
-                budget = 0;
-            }
-        } else if (action === 'save') {
-            consecutiveSpendDays = 0;
-            budget += amount;
-        }
-
-        totalDays++;
-    }
-
-    if (budget >= moneyNeeded) {
-        console.log(`You saved the money for ${totalDays} days.`);
+    if (timeLeft >= episodeLength) {
+        console.log(`You have enough time to watch ${series} and left with ${Math.ceil(timeLeft - episodeLength)} minutes free time.`);
     } else {
-        console.log(`You can't save the money.`);
-        console.log(totalDays);
+        console.log(`You don't have enough time to watch ${series}, you need ${Math.ceil(timeNeeded)} more minutes.`);
     }
 }
-demo(["2000",
-"1000",
-"spend",
-"1200",
-"save",
-"2000"]);
+demo(["Game of Thrones", "60", "96"]);
